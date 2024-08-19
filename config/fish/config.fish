@@ -19,3 +19,6 @@ zoxide init fish | source
 # Alias
 alias cat bat
 alias eza ls
+alias cd z
+alias vim nvim
+alias vi nvim

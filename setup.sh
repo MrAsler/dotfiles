@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 which -s brew
 if [[ $? != 0 ]] ; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -9,8 +11,6 @@ fi
 brew install fish
 brew install alacritty
 brew install nvim
-
-fish_add_path /opt/homebrew/bin
 
 # Tools
 brew install git
@@ -29,6 +29,13 @@ brew install ripgrep
 brew install tldr
 
 # Configure tools
+ 
+# Configure Git
+git config --global user.email valter.c.santos@protonmail.com
+git config --global user.name 'Valter Santos'
+git config --global pull.ff=only
+git config --global core.editor nvim
+
 # diff-so-fancy
 # Add diff-so-fancy as default
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RF"
