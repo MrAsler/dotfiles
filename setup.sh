@@ -27,13 +27,14 @@ brew install eza
 brew install zoxide
 brew install ripgrep
 brew install tldr
+brew install --cask font-jetbrains-mono-nerd-font
+
 
 # Configure tools
  
 # Configure Git
 git config --global user.email valter.c.santos@protonmail.com
 git config --global user.name 'Valter Santos'
-git config --global pull.ff=only
 git config --global core.editor nvim
 
 # diff-so-fancy

@@ -2,6 +2,8 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+fish_add_path /opt/homebrew/bin/
+
 # fx - JSON viewer 
 # https://fx.wtf/install 
 # Add auto complete to shell
