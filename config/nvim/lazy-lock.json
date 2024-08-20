@@ -1,4 +1,4 @@
-{
+    {
   "LuaSnip": { "branch": "master", "commit": "b84eeb3641b08324287587b426ec974b888390d9" },
   "NvChad": { "branch": "v2.5", "commit": "fea5d02d2d07b148243c058d1b8b775f9cccac5e" },
   "base46": { "branch": "v2.5", "commit": "4f4a9d205ccef5785ca1d0ad875752478b8ef2a4" },
