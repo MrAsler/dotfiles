@@ -1,5 +1,5 @@
-vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
-vim.g.mapleader = " "
+require "mappings"
+require "options"
 
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
@@ -11,54 +11,16 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+-- Todo - lazy config not working as expected
 local lazy_config = require "configs.lazy"
-
--- load plugins
-require("lazy").setup({
-  {
-    "NvChad/NvChad",
-    lazy = false,
-    branch = "v2.5",
-    import = "nvchad.plugins",
+require("lazy").setup({ { import = "plugins" } }, {
+  checker = {
+    enabled = true,
+    notify = false,
   },
-
-  { import = "plugins" },
+  change_detection = {
+    notify = false,
+  },
 }, lazy_config)
 
--- load theme
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
-
-require "options"
-require "nvchad.autocmds"
-
-vim.schedule(function()
-  require "mappings"
-end)
-
--- NvimTree settings
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- optionally enable 24-bit colour
-vim.opt.termguicolors = true
-
--- OR setup with some options
-require("nvim-tree").setup({
-  sort = {
-    sorter = "case_sensitive",
-  },
-  view = {
-    width = 30,
-  },
-  renderer = {
-    group_empty = true,
-    --hidden_display = "all",
-  },
-  filters = {
-    dotfiles = false,
-  },
-})
-
-
+vim.cmd.colorscheme "catppuccin"

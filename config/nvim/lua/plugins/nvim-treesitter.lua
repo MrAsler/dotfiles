@@ -1,8 +1,38 @@
-local M = {
-    "nvim-treesitter/nvim-treesitter",
-    build = function()
-        require("nvim-treesitter.install").update({ with_sync = true })()
-    end,
-}
+return {
+  "nvim-treesitter/nvim-treesitter",
+  event = { "BufReadPre", "BufNewFile" },
+  build = ":TSUpdate",
+  dependencies = {
+    "windwp/nvim-ts-autotag",
+  },
+  config = function()
+    -- import nvim-treesitter plugin
+    local treesitter = require "nvim-treesitter.configs"
 
-return { M }
+    -- configure treesitter
+    treesitter.setup {
+      highlight = { enable = true },
+      indent = { enable = true },
+      autotag = { enable = true },
+
+      ensure_installed = {
+        "json",
+        "lua",
+        "c",
+        "zig",
+        "rust",
+        "ruby",
+      },
+
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<C-w>",
+          node_incremental = "<C-w>",
+          scope_incremental = false,
+          node_decremental = "<C-r>",
+        },
+      },
+    }
+  end,
+}
