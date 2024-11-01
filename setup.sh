@@ -44,12 +44,12 @@ BREW_macos_casks=(
 )
 
 # Install everything
-brew install ${BREW_programming[@]} ${BREW_tools[@]}
-brew install --cask ${BREW_casks[@]} ${BREW_macos_casks[@]}
+brew install --quiet ${BREW_programming[@]} ${BREW_tools[@]}
+brew install --quiet --cask ${BREW_casks[@]} ${BREW_macos_casks[@]}
 
 # Configure MacOS
 
-mkdir ~/Developer
+mkdir -p ~/Developer
 defaults write -g InitialKeyRepeat -int 15
 defaults write -g KeyRepeat -int 1
 defaults write http://com.apple.finder AppleShowAllFiles YES
