@@ -4,43 +4,46 @@ which -s brew
 if [[ $? != 0 ]] ; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
-    brew update
+  brew update
 fi
 
 # Programming
 BREW_programming=(
-    fish 
-    alacritty 
-    nvim
-    zed
+  fish 
+  alacritty 
+  nvim
 )
 
 # Tools
 BREW_tools=(
-    git 
-    bat 
-    diff-so-fancy
-    fx 
-    fzf 
-    duf 
-    htop
-    hexyl 
-    glow 
-    fd
-    eza 
-    zoxide 
-    ripgrep
-    tldr
-    lazygit
+  git 
+  bat 
+  diff-so-fancy
+  fx 
+  fzf 
+  duf 
+  htop
+  hexyl 
+  glow 
+  fd
+  eza 
+  zoxide 
+  ripgrep
+  tldr
+  lazygit
 )
 
 BREW_casks=(
-    font-jetbrains-mono-nerd-font
+  font-jetbrains-mono-nerd-font
+)
+
+BREW_macos_casks=(
+  alt-tab
 )
 
 # Install everything
 brew install ${BREW_programming[@]} ${BREW_tools[@]}
-brew install --cask ${BREW_casks[@]}
+brew install --cask ${BREW_casks[@]} ${BREW_macos_casks[@]}
 
 # Configure MacOS
 
