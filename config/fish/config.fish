@@ -3,6 +3,7 @@ if status is-interactive
 end
 
 fish_add_path /opt/homebrew/bin/
+set fish_greeting
 
 # fx - JSON viewer 
 # https://fx.wtf/install 

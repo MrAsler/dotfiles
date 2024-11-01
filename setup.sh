@@ -32,6 +32,7 @@ BREW_tools=(
   ripgrep
   tldr
   lazygit
+  fastfetch
 )
 
 BREW_casks=(
