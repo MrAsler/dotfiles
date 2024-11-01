@@ -12,6 +12,7 @@ BREW_programming=(
   fish 
   alacritty 
   nvim
+  zed
 )
 
 # Tools
@@ -34,6 +35,7 @@ BREW_tools=(
 )
 
 BREW_casks=(
+  zen-browser
   font-jetbrains-mono-nerd-font
 )
 

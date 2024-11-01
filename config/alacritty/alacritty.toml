@@ -1,19 +1,9 @@
-import = [
-  # uncomment the flavour you want below:
-  # "~/.config/alacritty/catppuccin-latte.toml"
-  # "~/.config/alacritty/catppuccin-frappe.toml"
-  # "~/.config/alacritty/catppuccin-macchiato.toml"
-   "~/.config/alacritty/catppuccin-mocha.toml"
-]
-
-shell = '/opt/homebrew/bin/fish'
-live_config_reload = true
 
 [env]
 TERM = "xterm-256color"
 
 [font]
-size = 18.0
+size = 16.0
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
@@ -36,3 +26,17 @@ bindings = [
   { key = "Right", mods = "Alt", chars = "\u001BF" },
   { key = "Left",  mods = "Alt", chars = "\u001BB" },
 ]
+
+[general]
+live_config_reload = true
+import = [
+  # uncomment the flavour you want below:
+  # "~/.config/alacritty/catppuccin-latte.toml"
+  # "~/.config/alacritty/catppuccin-frappe.toml"
+  # "~/.config/alacritty/catppuccin-macchiato.toml"
+   "~/.config/alacritty/catppuccin-mocha.toml"
+]
+
+[terminal]
+
+shell = '/opt/homebrew/bin/fish'
