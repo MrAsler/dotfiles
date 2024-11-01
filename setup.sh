@@ -8,27 +8,46 @@ else
 fi
 
 # Programming
-brew install fish
-brew install alacritty
-brew install nvim
-brew install zed
+BREW_programming=(
+    fish 
+    alacritty 
+    nvim
+    zed
+)
 
 # Tools
-brew install git
-brew install bat 
-brew install diff-so-fancy
-brew install fx
-brew install fzf
-brew install duf
-brew install htop
-brew install hexyl
-brew install glow
-brew install fd
-brew install eza
-brew install zoxide
-brew install ripgrep
-brew install tldr
-brew install --cask font-jetbrains-mono-nerd-font
+BREW_tools=(
+    git 
+    bat 
+    diff-so-fancy
+    fx 
+    fzf 
+    duf 
+    htop
+    hexyl 
+    glow 
+    fd
+    eza 
+    zoxide 
+    ripgrep
+    tldr
+    lazygit
+)
+
+BREW_casks=(
+    font-jetbrains-mono-nerd-font
+)
+
+# Install everything
+brew install ${BREW_programming[@]} ${BREW_tools[@]}
+brew install --cask ${BREW_casks[@]}
+
+# Configure MacOS
+
+mkdir ~/Developer
+defaults write -g InitialKeyRepeat -int 15
+defaults write -g KeyRepeat -int 1
+defaults write http://com.apple.finder AppleShowAllFiles YES
 
 # Configure tools
  
