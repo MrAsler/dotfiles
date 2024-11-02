@@ -19,6 +19,10 @@ fzf --fish | source
 # Set up zoxide for fish
 zoxide init fish | source
 
+# Update config home
+export XDG_CONFIG_HOME="$HOME/.config" # Required for lazygit
+
+
 # Alias
 alias cat bat
 alias eza ls

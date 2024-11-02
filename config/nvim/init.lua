@@ -12,6 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require "configs.lazy"
-require("lazy").setup({{ import = "plugins" }}, lazy_config)
+require("lazy").setup({ { import = "plugins" } }, lazy_config)
 
 vim.cmd.colorscheme "catppuccin"

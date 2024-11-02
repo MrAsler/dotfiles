@@ -19,7 +19,7 @@ BREW_programming=(
 BREW_tools=(
   git 
   bat 
-  diff-so-fancy
+  git-delta
   fx 
   fzf 
   duf 
@@ -54,6 +54,7 @@ mkdir -p ~/Developer
 defaults write -g InitialKeyRepeat -int 15
 defaults write -g KeyRepeat -int 1
 defaults write http://com.apple.finder AppleShowAllFiles YES
+export XDG_CONFIG_HOME="$HOME/.config" # Required for lazygit
 
 # Configure tools
  
@@ -63,10 +64,12 @@ git config --global user.name 'Valter Santos'
 git config --global core.editor nvim
 git config --global rerere.enabled true
 
-# diff-so-fancy
-# Add diff-so-fancy as default
-git config --global core.pager "diff-so-fancy | less --tabs=4 -RF"
-git config --global interactive.diffFilter "diff-so-fancy --patch"
+# delta
+# Add delta as default
+git config --global core.pager "delta"
+git config --global interactive.diffFilter "delta --color-only"
+git config --global delta.navigate true
+git config --global merge.conflictstyle zdiff3
 
 # Copy config files to correct locations
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
@@ -78,3 +81,6 @@ cp -a $SCRIPT_DIR/config/alacritty/ ~/.config/alacritty/
 
 # nvim 
 cp -a $SCRIPT_DIR/config/nvim/ ~/.config/nvim
+
+# lazy git
+cp -a $SCRIPT_DIR/config/lazygit/ ~/.config/lazygit/
