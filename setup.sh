@@ -82,7 +82,10 @@ cp $SCRIPT_DIR/config/fish/config.fish ~/.config/fish/config.fish
 cp -a $SCRIPT_DIR/config/alacritty/ ~/.config/alacritty/
 
 # nvim 
-cp -a $SCRIPT_DIR/config/nvim/ ~/.config/nvim
+cp -a $SCRIPT_DIR/config/nvim/ ~/.config/nvim/
 
 # lazy git
 cp -a $SCRIPT_DIR/config/lazygit/ ~/.config/lazygit/
+
+# Yazi
+cp -a $SCRIPT_DIR/config/yazi/ ~/.config/yazi/
