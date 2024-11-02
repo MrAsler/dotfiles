@@ -13,6 +13,7 @@ BREW_programming=(
   alacritty 
   nvim
   zed
+  tmux
 )
 
 # Tools
@@ -33,6 +34,7 @@ BREW_tools=(
   tldr
   lazygit
   fastfetch
+  yazi
 )
 
 BREW_casks=(
