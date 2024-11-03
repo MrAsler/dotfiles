@@ -89,3 +89,7 @@ cp -a $SCRIPT_DIR/config/lazygit/ ~/.config/lazygit/
 
 # Yazi
 cp -a $SCRIPT_DIR/config/yazi/ ~/.config/yazi/
+
+# Not using Aerospace for now
+# Aerospace
+# cp -a $SCRIPT_DIR/config/aerospace/ ~/.config/aerospace
