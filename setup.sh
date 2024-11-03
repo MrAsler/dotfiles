@@ -13,7 +13,6 @@ BREW_programming=(
   alacritty 
   nvim
   zed
-  tmux
 )
 
 # Tools
