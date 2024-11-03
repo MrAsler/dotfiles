@@ -90,6 +90,9 @@ cp -a $SCRIPT_DIR/config/lazygit/ ~/.config/lazygit/
 # Yazi
 cp -a $SCRIPT_DIR/config/yazi/ ~/.config/yazi/
 
+# Zed
+cp -a $SCRIPT_DIR/config/zed/settings.json ~/.config/zed/settings.json
+
 # Aerospace
 cp -a $SCRIPT_DIR/config/aerospace/ ~/.config/aerospace
 aerospace reload-config
