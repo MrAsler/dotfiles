@@ -117,31 +117,19 @@ alt-shift-equal = 'resize smart +50'
 alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
 alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
-alt-9 = 'workspace 9'
-alt-b = 'workspace B - Browser' # Browser
-alt-m = 'workspace M - Music' # Music / Sptofiy
-alt-n = 'workspace N - Notes' # Notes
-alt-t = 'workspace T - Terminal' # Terminal
+alt-b = 'workspace Browser' # Browser
+alt-m = 'workspace Music' # Music / Sptofiy
+alt-n = 'workspace Notes' # Notes
+alt-t = 'workspace Terminal' # Terminal
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
-alt-shift-4 = 'move-node-to-workspace 4'
-alt-shift-5 = 'move-node-to-workspace 5'
-alt-shift-6 = 'move-node-to-workspace 6'
-alt-shift-7 = 'move-node-to-workspace 7'
-alt-shift-8 = 'move-node-to-workspace 8'
-alt-shift-9 = 'move-node-to-workspace 9'
-alt-shift-b = 'move-node-to-workspace B - Browser'
-alt-shift-m = 'move-node-to-workspace M - Music'
-alt-shift-n = 'move-node-to-workspace N - Notes'
-alt-shift-t = 'move-node-to-workspace T - Terminal'
+alt-shift-b = 'move-node-to-workspace Browser'
+alt-shift-m = 'move-node-to-workspace Music'
+alt-shift-n = 'move-node-to-workspace Notes'
+alt-shift-t = 'move-node-to-workspace Terminal'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -166,3 +154,12 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
+
+[[on-window-detected]]
+if.app-id = 'org.alacritty'
+run = ['layout floating', 'move-node-to-workspace Terminal']
+
+[[on-window-detected]]
+if.app-id = 'org.mozilla.com.zen.browser'
+run = 'move-node-to-workspace Browser'
+
