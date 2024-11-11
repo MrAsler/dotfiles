@@ -11,6 +11,7 @@ fi
 BREW_programming=(
   fish 
   alacritty 
+  starship
   nvim
   zed
 )

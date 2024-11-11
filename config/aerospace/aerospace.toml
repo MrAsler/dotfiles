@@ -163,3 +163,6 @@ run = ['layout floating', 'move-node-to-workspace Terminal']
 if.app-id = 'org.mozilla.com.zen.browser'
 run = 'move-node-to-workspace Browser'
 
+[[on-window-detected]]
+if.workspace = 'workspace 1'
+run = 'layout floating'
