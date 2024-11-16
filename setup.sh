@@ -24,7 +24,7 @@ BREW_tools=(
   fx 
   fzf 
   duf 
-  htop
+  btop
   hexyl 
   glow 
   fd
