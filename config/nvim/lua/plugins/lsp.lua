@@ -12,6 +12,7 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "j-hui/fidget.nvim",
   },
+  lazy = false,
 
   config = function()
     local cmp = require "cmp"
@@ -24,8 +25,7 @@ return {
     require("mason-lspconfig").setup {
       ensure_installed = {
         "lua_ls",
-        "zls",
-        -- "ruby_lsp",
+        "gopls",
         "rust_analyzer",
       },
       handlers = {
@@ -78,7 +78,7 @@ return {
       mapping = cmp.mapping.preset.insert {
         ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
         ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-        ["<C-y>"] = cmp.mapping.confirm { select = true },
+        ["<Enter>"] = cmp.mapping.confirm { select = true },
         ["<C-Space>"] = cmp.mapping.complete(),
       },
       sources = cmp.config.sources({
@@ -88,7 +88,7 @@ return {
         { name = "buffer" },
       }),
     }
-
+  
     vim.diagnostic.config {
       -- update_in_insert = true,
       float = {

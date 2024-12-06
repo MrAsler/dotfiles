@@ -35,12 +35,12 @@ BREW_tools=(
   lazygit
   fastfetch
   yazi
+  zellij
 )
 
 BREW_casks=(
   zen-browser
   font-jetbrains-mono-nerd-font
-  nikitabobko/tap/aerospace
 )
 
 BREW_macos_casks=(
@@ -93,7 +93,3 @@ cp -a $SCRIPT_DIR/config/yazi/ ~/.config/yazi/
 
 # Zed
 cp -a $SCRIPT_DIR/config/zed/settings.json ~/.config/zed/settings.json
-
-# Aerospace
-cp -a $SCRIPT_DIR/config/aerospace/ ~/.config/aerospace
-aerospace reload-config
