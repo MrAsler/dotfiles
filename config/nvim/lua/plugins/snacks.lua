@@ -6,6 +6,7 @@ return {
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
+    dashboard = { enabled = true },
     bigfile = { enabled = true },
     notifier = { enabled = true },
     quickfile = { enabled = true },

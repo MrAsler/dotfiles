@@ -38,7 +38,7 @@ starship init fish | source
 
 # Alias
 alias cat bat
-alias eza ls
+alias ls eza
 alias cd z
 alias vim nvim
 alias vi nvim
