@@ -10,7 +10,7 @@ fi
 # Programming
 BREW_programming=(
   fish 
-  alacritty 
+  ghostty
   starship
   nvim
   zed
@@ -76,20 +76,5 @@ git config --global merge.conflictstyle zdiff3
 
 # Copy config files to correct locations
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-# Fish
-cp $SCRIPT_DIR/config/fish/config.fish ~/.config/fish/config.fish
 
-# alacritty
-cp -a $SCRIPT_DIR/config/alacritty/ ~/.config/alacritty/
-
-# nvim 
-cp -a $SCRIPT_DIR/config/nvim/ ~/.config/nvim/
-
-# lazy git
-cp -a $SCRIPT_DIR/config/lazygit/ ~/.config/lazygit/
-
-# Yazi
-cp -a $SCRIPT_DIR/config/yazi/ ~/.config/yazi/
-
-# Zed
-cp -a $SCRIPT_DIR/config/zed/settings.json ~/.config/zed/settings.json
+cp -r $SCRIPT_DIR/config ~/.config/
