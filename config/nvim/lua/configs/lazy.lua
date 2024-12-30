@@ -1,14 +1,6 @@
 return {
   defaults = { lazy = true },
 
-  checker = {
-    enabled = true,
-    notify = false,
-  },
-  change_detection = {
-    notify = false,
-  },
-
   ui = {
     icons = {
       ft = "",

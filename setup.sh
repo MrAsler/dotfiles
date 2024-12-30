@@ -77,4 +77,4 @@ git config --global merge.conflictstyle zdiff3
 # Copy config files to correct locations
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-cp -r $SCRIPT_DIR/config ~/.config/
+cp -rv $SCRIPT_DIR/config/ ~/.config/
