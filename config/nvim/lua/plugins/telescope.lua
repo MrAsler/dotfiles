@@ -1,6 +1,8 @@
+-- https://github.com/nvim-telescope/telescope.nvim
+-- fuzzy finder over lists.
+
 return {
   "nvim-telescope/telescope.nvim",
-  version = "*",
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },

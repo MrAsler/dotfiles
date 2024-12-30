@@ -1,3 +1,6 @@
+-- https://github.com/neovim/nvim-lspconfig
+-- nvim-lspconfig is a "data only" repo, providing basic, default Nvim LSP client configurations for various LSP servers.
+
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
@@ -50,6 +53,7 @@ return {
           vim.g.zig_fmt_parse_errors = 0
           vim.g.zig_fmt_autosave = 0
         end,
+
         ["lua_ls"] = function()
           local lspconfig = require "lspconfig"
           lspconfig.lua_ls.setup {
@@ -72,7 +76,7 @@ return {
     cmp.setup {
       snippet = {
         expand = function(args)
-          require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+--          require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
         end,
       },
       mapping = cmp.mapping.preset.insert {

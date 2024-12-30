@@ -24,6 +24,7 @@ o.shiftwidth = 2
 o.smartindent = true
 o.tabstop = 2
 o.softtabstop = 2
+o.scrolloff = 5
 
 opt.fillchars = { eob = " " }
 o.ignorecase = true
