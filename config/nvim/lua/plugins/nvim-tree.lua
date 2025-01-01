@@ -9,7 +9,7 @@ return {
     vim.g.loaded_netrwPlugin = 1
     vim.g.termguicolors = true
 
-    require("nvim-tree").setup({
+    require("nvim-tree").setup {
       renderer = {
         group_empty = true,
         --hidden_display = "all",
@@ -17,6 +17,6 @@ return {
       filters = {
         dotfiles = false,
       },
-    })
-  end
+    }
+  end,
 }

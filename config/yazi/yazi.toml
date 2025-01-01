@@ -1,4 +1,7 @@
 [opener]
+play = [
+  { run = '/Applications/IINA.app/Contents/MacOS/IINA "$@"', orphan = true, for = "macos" },
+]
 edit = [
 	{ run = '${EDITOR:-nvim} "$@"', desc = "$EDITOR", block = true, for = "unix" },
 ]

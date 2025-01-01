@@ -1,6 +1,6 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter
--- Tree-sitter is a parser generator tool and an incremental parsing library. 
--- It can build a concrete syntax tree for a source file and efficiently update the syntax tree as the source file is edited. 
+-- Tree-sitter is a parser generator tool and an incremental parsing library.
+-- It can build a concrete syntax tree for a source file and efficiently update the syntax tree as the source file is edited.
 
 return {
   "nvim-treesitter/nvim-treesitter",
@@ -28,6 +28,7 @@ return {
         "zig",
         "rust",
         "ruby",
+        "go",
       },
 
       incremental_selection = {
@@ -37,10 +38,10 @@ return {
           node_incremental = "grn",
           scope_incremental = "grc",
           node_decremental = "grm",
-    --      init_selection = "<C-w>",
-    --      node_incremental = "<C-w>",
-    --      scope_incremental = false,
-    --      node_decremental = "<C-r>",
+          --      init_selection = "<C-w>",
+          --      node_incremental = "<C-w>",
+          --      scope_incremental = false,
+          --      node_decremental = "<C-r>",
         },
       },
     }

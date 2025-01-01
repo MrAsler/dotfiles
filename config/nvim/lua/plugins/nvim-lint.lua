@@ -1,5 +1,5 @@
- -- https://github.com/mfussenegger/nvim-lint
- -- An asynchronous linter plugin for Neovim (>= 0.9.5) complementary to the built-in Language Server Protocol support.
+-- https://github.com/mfussenegger/nvim-lint
+-- An asynchronous linter plugin for Neovim (>= 0.9.5) complementary to the built-in Language Server Protocol support.
 
 return {
   "mfussenegger/nvim-lint",
@@ -8,8 +8,9 @@ return {
     local lint = require "lint"
 
     lint.linters_by_ft = {
-      go = { "golangcilint", "staticcheck" },
-      lua = { 'luac' }
+      go = { "golangcilint" },
+      -- go = { "staticcheck "}
+      lua = { "luac" },
     }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

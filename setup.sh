@@ -17,25 +17,34 @@ BREW_programming=(
 )
 
 # Tools
-BREW_tools=(
-  git 
+BREW_tools=(  
   bat 
-  git-delta
+  btop
+  duf 
+  eza 
+  fastfetch
+  fd
   fx 
   fzf 
-  duf 
-  btop
-  hexyl 
+  git 
+  git-delta
   glow 
-  fd
-  eza 
-  zoxide 
+  hexyl
+  lazygit
   ripgrep
   tldr
-  lazygit
-  fastfetch
   yazi
   zellij
+  zoxide 
+)
+
+# The following deps are installed to give more functionality to Yazi
+# Yazi may have other deps that are also installed but because I use them directly (e.g. ripgrep)
+BREW_yazi_deps=(
+  ffmpeg    # video preview
+  jq        # JSON preview
+  p7zip     # Archive preview
+  poppler   # PDF preview
 )
 
 BREW_casks=(
@@ -48,7 +57,7 @@ BREW_macos_casks=(
 )
 
 # Install everything
-brew install --quiet ${BREW_programming[@]} ${BREW_tools[@]}
+brew install --quiet ${BREW_programming[@]} ${BREW_tools[@]} ${BREW_yazi_deps[@]}
 brew install --quiet --cask ${BREW_casks[@]} ${BREW_macos_casks[@]}
 
 # Configure MacOS
@@ -74,7 +83,25 @@ git config --global interactive.diffFilter "delta --color-only"
 git config --global delta.navigate true
 git config --global merge.conflictstyle zdiff3
 
-# Copy config files to correct locations
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-cp -rv $SCRIPT_DIR/config/ ~/.config/
+## SYNC CONFIGS
+
+CURRENT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+TARGET_DIR="$HOME/.config"
+
+APPS_WITH_CONFIGS=(
+  ghostty
+  lazygit
+  nvim
+  yazi
+  zed
+)
+
+for appName in ${APPS_WITH_CONFIGS[@]}; do
+  rm -r $TARGET_DIR/$appName
+  ln -s $CURRENT_DIR/config/$appName $TARGET_DIR/
+  echo "Updated symlink for $appName"
+done
+
+# Explictly only copy the fish config file 
+cp $CURRENT_DIR/config/fish/config.fish $HOME/.config/fish/config.fish
