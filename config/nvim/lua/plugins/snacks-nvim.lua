@@ -5,7 +5,6 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
     dashboard = { enabled = true },
@@ -138,6 +137,13 @@ return {
       end,
       desc = "Prev Reference",
       mode = { "n", "t" },
+    },
+    {
+      "<leader>nh",
+      function()
+        Snacks.notifier.show_history()
+      end,
+      desc = "Show notification history",
     },
     {
       "<leader>N",

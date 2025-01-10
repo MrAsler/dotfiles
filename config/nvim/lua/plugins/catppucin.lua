@@ -5,9 +5,7 @@ return {
   name = "catppuccin",
   lazy = false,
   priority = 1000,
-  config = function()
-    require("catppuccin").setup {
-      flavour = "auto",
-    }
-  end,
+  opts = {
+    flavour = "auto",
+  },
 }

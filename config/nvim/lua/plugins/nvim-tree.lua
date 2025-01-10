@@ -10,6 +10,10 @@ return {
     vim.g.termguicolors = true
 
     require("nvim-tree").setup {
+      update_focused_file = {
+        enable = true,
+        update_root = true,
+      },
       renderer = {
         group_empty = true,
         --hidden_display = "all",

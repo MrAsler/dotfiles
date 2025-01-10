@@ -6,6 +6,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    { "nvim-telescope/telescope-ui-select.nvim" },
     "nvim-tree/nvim-web-devicons",
   },
   lazy = false,
@@ -13,12 +14,15 @@ return {
   config = function()
     local telescope = require "telescope"
     telescope.setup {
-      defaults = {
-        path_display = { "smart" },
+      extensions = {
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown(),
+        },
       },
     }
 
     telescope.load_extension "fzf"
+    telescope.load_extension "ui-select"
 
     local map = vim.keymap.set
     local builtin = require "telescope.builtin"
@@ -26,7 +30,6 @@ return {
     map("n", "<C-p>", builtin.git_files, { desc = "Telescope find git tracked files" })
     map("n", "<leader>pg", builtin.live_grep, { desc = "Telescope live grep" })
     map("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
-    map("n", "<leader>fc", builtin.grep_string, { desc = "Telescope find string under cursor" })
     map("n", "<leader>fc", builtin.grep_string, { desc = "Telescope find string under cursor" })
     map("n", "<leader><leader>", builtin.oldfiles, { desc = "See old files" })
   end,
