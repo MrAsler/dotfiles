@@ -6,7 +6,7 @@ function configure_lsp_config()
   local lsp_config = require "lspconfig"
 
   local capabilities =
-    vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+      vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
 
   -- Lua
   lsp_config.lua_ls.setup {
@@ -53,6 +53,22 @@ function configure_lsp_config()
     },
   }
 
+  lsp_config.zls.setup {
+    capabilities = capabilities
+  }
+
+  lsp_config.ts_ls.setup {
+    capabilities = capabilities,
+    settings = {
+      completions = {
+        completeFunctionCalls = true
+      }
+    }
+  }
+  lsp_config.tailwindcss.setup {
+    capabilities = capabilities
+  }
+
   --  Bash
   lsp_config.bashls.setup { capabilities = capabilities }
   --  JSON
@@ -79,11 +95,21 @@ function formatter()
         go = { "goimports" },
         python = { "ruff_format" },
         bash = { "shfmt" },
+
+        -- Frontend
+        typescript = { 'prettierd', "prettier", stop_after_first = true } ,
+        typescriptreact = { 'prettierd', "prettier", stop_after_first = true },
+        javascript = { 'prettierd', "prettier", stop_after_first = true },
+        javascriptreact = { 'prettierd', "prettier", stop_after_first = true },
+        json = { 'prettierd', "prettier", stop_after_first = true },
+        html = { 'prettierd', "prettier", stop_after_first = true },
+        css = { 'prettierd', "prettier", stop_after_first = true },
+
       },
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_format = "fallback",
-      },
+           format_on_save = {
+             timeout_ms = 500,
+             lsp_format = "fallback",
+           },
     },
   }
 end
@@ -101,16 +127,17 @@ function linter()
       }
 
       local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
         group = lint_augroup,
-        callback = function()
-          lint.try_lint()
-        end,
+        callback = function() lint.try_lint() end,
       })
 
       vim.keymap.set("n", "<leader>li", function()
         lint.try_lint()
       end, { desc = "Trigger linting for current file" })
+
+      local ns = require("lint").get_namespace("my_linter_name")
+      --vim.diagnostic.config({ virtual_text = true }, ns)
     end,
   }
 end
@@ -150,28 +177,40 @@ return {
           -- "luac", -- linter
 
           -- Golang
-          "gopls", -- language server
+          "gopls",            -- language server
           -- "goimports", -- formatter
-          -- "golangci-lint", -- linter
+          "golangci_lint_ls", -- linter
 
           -- Rust (managed by `rustup`)
           -- "rustfmt", -- formatter"
           -- "rust-analyzer", -- language server
+          
+          -- Javascript
+          -- Typescript
+          "ts_ls",
+          "eslint",
+          "cssls",
+          "tailwindcss",
+
+
 
           -- Python
           "pyright", -- language server
-          "ruff", -- formatter
+          "ruff",    -- formatter
+
+          -- Zig
+          -- "zls", -- Installed locally
 
           -- Shell
           "bashls", -- language server
           -- "shfmt", -- formatting
 
           -- Templating languages
-          "jsonls", -- JSON LS
-          "html", -- HTML language server
-          "taplo", -- TOML language server
-          "yamlls", -- YAML language server
-          "lemminx", -- XML language server
+          "jsonls",   -- JSON LS
+          "html",     -- HTML language server
+          "taplo",    -- TOML language server
+          "yamlls",   -- YAML language server
+          "lemminx",  -- XML language server
           "marksman", -- Markdown language server
         },
       }
@@ -209,30 +248,7 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
-          -- Jump to the definition of the word under your cursor.
-          --  This is where a variable was first declared, or where a function is defined, etc.
-          --  To jump back, press <C-t>.
-          map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-
-          -- Find references for the word under your cursor.
-          map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-
-          -- Jump to the implementation of the word under your cursor.
-          --  Useful when your language has ways of declaring types without an actual implementation.
-          map("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-
-          -- Jump to the type of the word under your cursor.
-          --  Useful when you're not sure what type a variable is and you want to see
-          --  the definition of its *type*, not where it was *defined*.
-          map("gt", require("telescope.builtin").lsp_type_definitions, "[G]oto [T]ype Definition")
-
-          -- Fuzzy find all the symbols in your current document.
-          --  Symbols are things like variables, functions, types, etc.
-          map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-
-          -- Fuzzy find all the symbols in your current workspace.
-          --  Similar to document symbols, except searches over your entire project.
-          map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+          --map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
           map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")

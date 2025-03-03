@@ -15,10 +15,11 @@ return {
       },
       renderer = {
         group_empty = true,
-        --hidden_display = "all",
+        hidden_display = "all",
       },
       filters = {
         dotfiles = false,
+        git_ignored = false,
       },
     }
   end,

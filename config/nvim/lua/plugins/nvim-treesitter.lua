@@ -29,6 +29,12 @@ return {
         "rust",
         "ruby",
         "go",
+        "dockerfile",
+        "tsx",
+        "javascript",
+        "typescript",
+        "html",
+        "css"
       },
 
       incremental_selection = {
