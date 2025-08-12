@@ -1,52 +1,94 @@
 #!/usr/bin/env bash
 
+# ==========================
+# PART ONE
+# --------
+# Need to install YAY first.
+# =========================
+if ! command -v yay &>/dev/null; then
+
+  sudo pacman -S --needed git base-devel
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
+
+  cd ..
+  rm -r yay
+  echo "Yay installed succesfully!"
+else
+  echo "Yay is already installed. Skipping."
+fi
+
+# ==========================
+# PART TWO
+# --------
+# Install of the programs
+# =========================
+
 # Programming
-BREW_programming=(
-  fish 
+APPS_programming=(
+  fish
   ghostty
   starship
-  neovim
+  nvim
   zed
 )
 
 # Tools
-BREW_tools=(  
-  bat 
+APPS_tools=(
+  bat
   btop
-  duf 
-  eza 
+  duf
+  eza
   fastfetch
   fd
-  fx 
-  fzf 
-  git 
+  fx
+  fzf
+  git
   git-delta
-  glow 
+  glow
   hexyl
   lazygit
   ripgrep
   tldr
+  stow
   yazi
-  zoxide 
+  zoxide
+)
+
+APPS_other=(
+  google-chrome
+  zen-browser-bin
+  discord
 )
 
 # The following deps are installed to give more functionality to Yazi
 # Yazi may have other deps that are also installed but because I use them directly (e.g. ripgrep)
-BREW_yazi_deps=(
+APPS_yazi_deps=(
   ffmpeg    # video preview
   jq        # JSON preview
   p7zip     # Archive preview
   poppler   # PDF preview
 )
 
-BREW_casks=(
-  zen-browser
-  font-jetbrains-mono-nerd-font
+ALL_APPS=(
+  "${APPS_programming[@]}"
+  "${APPS_tools[@]}"
+  "${APPS_other[@]}"
+  "${APPS_yazi_deps[@]}"
 )
 
+yay -S --needed --noconfirm "${ALL_APPS[@]}"
+
+
+# ==========================
+# PART THREE
+# --------
+# Configure everything.
+# =========================
 
 # Configure tools
- 
+
 # Configure Git
 git config --global user.email valter.c.santos@protonmail.com
 git config --global user.name 'Valter Santos'
@@ -60,26 +102,18 @@ git config --global interactive.diffFilter "delta --color-only"
 git config --global delta.navigate true
 git config --global merge.conflictstyle zdiff3
 
+#### Configure Keyboard input Speed
+if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
+  kwriteconfig6 --file kcminputrc --group Keyboard --key RepeatDelay 200
+  kwriteconfig6 --file kcminputrc --group Keyboard --key RepeatRate 60
+fi
 
-CURRENT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-TARGET_DIR="$HOME/.config"
+# Setup symlinks
+stow -t ~/.config config/
 
-APPS_WITH_CONFIGS=(
-  ghostty
-  lazygit
-  nvim
-  yazi
-  zed
-)
-
-for appName in ${APPS_WITH_CONFIGS[@]}; do
-  rm -r $TARGET_DIR/$appName
-  ln -s $CURRENT_DIR/config/$appName $TARGET_DIR/
-  echo "Updated symlink for $appName"
-done
-
-# Explictly only copy the fish config file 
-cp $CURRENT_DIR/config/fish/config.fish $HOME/.config/fish/config.fish
-
-# Update default shell 
-chsh -s /usr/bin/fish
+# Update default shell
+if [[ "$SHELL" != "/usr/bin/fish" ]]; then
+    chsh -s /usr/bin/fish
+else
+    echo "Shell is already fish. Skipping."
+fi
