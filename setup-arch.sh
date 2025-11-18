@@ -34,32 +34,47 @@ APPS_programming=(
   zed
 )
 
-# Tools
-APPS_tools=(
+APPS_system=(
+  ufw
+  unzip 
+  uwsm
+  wl-clipboard
+  waybar
+  hyprland
+)
+
+APPS_cli=(
   bat
-  btop
   duf
-  eza
-  fastfetch
+  eza 
   fd
-  fx
   fzf
+  fx
   git
   git-delta
-  glow
-  hexyl
-  lazygit
+  glow 
+  hexyl 
   ripgrep
   tldr
   stow
-  yazi
   zoxide
 )
 
-APPS_other=(
+APPS_tui=(
+  btop
+  lazygit
+  impala
+  fastfetch
+  yazi
+)
+
+APPS_gui=(
+  satty
   google-chrome
   zen-browser-bin
   discord
+  walker
+  spotify
 )
 
 # The following deps are installed to give more functionality to Yazi
@@ -73,8 +88,10 @@ APPS_yazi_deps=(
 
 ALL_APPS=(
   "${APPS_programming[@]}"
-  "${APPS_tools[@]}"
-  "${APPS_other[@]}"
+  "${APPS_system[@]}"
+  "${APPS_cli[@]}"
+  "${APPS_tui[@]}"
+  "${APPS_gui[@]}"
   "${APPS_yazi_deps[@]}"
 )
 
@@ -107,6 +124,11 @@ if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
   kwriteconfig6 --file kcminputrc --group Keyboard --key RepeatDelay 200
   kwriteconfig6 --file kcminputrc --group Keyboard --key RepeatRate 60
 fi
+
+#### Configure Firewall
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw enable
 
 # Setup symlinks
 stow -t ~/.config config/
