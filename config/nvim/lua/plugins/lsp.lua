@@ -1,89 +1,5 @@
 -- https://github.com/neovim/nvim-lspconfig
 -- nvim-lspconfig is a "data only" repo, providing basic, default Nvim LSP client configurations for various LSP servers.
-
-function configure_lsp_config()
-  local cmp_lsp = require "cmp_nvim_lsp"
-  local lsp_config = require "lspconfig"
-
-  local capabilities =
-      vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
-
-  -- Lua
-  lsp_config.lua_ls.setup {
-    capabilities = capabilities,
-    settings = {
-      Lua = {
-        runtime = { version = "Lua 5.4" },
-        diagnostics = {
-          globals = { "vim", "Snacks" },
-        },
-      },
-    },
-  }
-
-  -- Go
-  lsp_config.gopls.setup { capabilities = capabilities }
-
-  -- Rust
-  lsp_config.rust_analyzer.setup {
-    capabilities = capabilities,
-    settings = {
-      ["rust-analyzer"] = {
-        cargo = { allFeatures = true },
-        procMacro = { enable = true },
-        checkOnSave = { command = "clippy" },
-      },
-    },
-  }
-
-  -- Python
-  lsp_config.pyright.setup {
-    capabilities = capabilities,
-    settings = {
-      python = {
-        analysis = {
-          diagnosticSeverityOverrides = {
-            -- https://microsoft.github.io/pyright/#/configuration?id=diagnostic-rule-defaults
-            reportMissingImports = "error",
-            reportUndefinedVariable = "none",
-          },
-          typeCheckingMode = "off",
-        },
-      },
-    },
-  }
-
-  lsp_config.zls.setup {
-    capabilities = capabilities
-  }
-
-  lsp_config.ts_ls.setup {
-    capabilities = capabilities,
-    settings = {
-      completions = {
-        completeFunctionCalls = true
-      }
-    }
-  }
-  lsp_config.tailwindcss.setup {
-    capabilities = capabilities
-  }
-
-  --  Bash
-  lsp_config.bashls.setup { capabilities = capabilities }
-  --  JSON
-  lsp_config.jsonls.setup { capabilities = capabilities }
-  -- HTML
-  lsp_config.html.setup { capabilities = capabilities }
-  -- TOML
-  lsp_config.taplo.setup { capabilities = capabilities }
-  -- YAML
-  lsp_config.yamlls.setup { capabilities = capabilities }
-  -- XML
-  lsp_config.marksman.setup { capabilities = capabilities }
-  -- Markdown
-end
-
 function formatter()
   return {
     "stevearc/conform.nvim",
@@ -97,7 +13,7 @@ function formatter()
         bash = { "shfmt" },
 
         -- Frontend
-        typescript = { 'prettierd', "prettier", stop_after_first = true } ,
+        typescript = { 'prettierd', "prettier", stop_after_first = true },
         typescriptreact = { 'prettierd', "prettier", stop_after_first = true },
         javascript = { 'prettierd', "prettier", stop_after_first = true },
         javascriptreact = { 'prettierd', "prettier", stop_after_first = true },
@@ -106,10 +22,10 @@ function formatter()
         css = { 'prettierd', "prettier", stop_after_first = true },
 
       },
-           format_on_save = {
-             timeout_ms = 500,
-             lsp_format = "fallback",
-           },
+      format_on_save = {
+        timeout_ms = 500,
+        lsp_format = "fallback",
+      },
     },
   }
 end
@@ -183,8 +99,8 @@ return {
 
           -- Rust (managed by `rustup`)
           -- "rustfmt", -- formatter"
-          -- "rust-analyzer", -- language server
-          
+          "rust_analyzer", -- language server
+
           -- Javascript
           -- Typescript
           "ts_ls",
@@ -199,13 +115,15 @@ return {
           "ruff",    -- formatter
 
           -- Zig
-          -- "zls", -- Installed locally
+          "zls", -- Installed locally
 
           -- Shell
           "bashls", -- language server
           -- "shfmt", -- formatting
 
           -- Templating languages
+          "cssls",
+          "svelte",
           "jsonls",   -- JSON LS
           "html",     -- HTML language server
           "taplo",    -- TOML language server
@@ -214,7 +132,14 @@ return {
           "marksman", -- Markdown language server
         },
       }
-      configure_lsp_config()
+
+      local cmp_nvim_lsp = require "cmp_nvim_lsp"
+
+      local capabilities = cmp_nvim_lsp.default_capabilities()
+
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
 
       local cmp = require "cmp"
       local cmp_select = { behavior = cmp.SelectBehavior.Select }

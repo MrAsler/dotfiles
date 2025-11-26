@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# TODO: Add Autologin for SDDM
+sudo
+
 # ==========================
 # PART ONE
 # --------
@@ -40,7 +43,36 @@ APPS_system=(
   uwsm
   wl-clipboard
   waybar
+  dua
+  dust
+  sddm
+  bluetui
+)
+
+APPS_hyprland=(
+  wayland
   hyprland
+  hyprlock
+  hyprland-guiutils
+  hypridle
+  mako
+)
+
+APPS_app_launcher=(
+  elephant
+  elephant-calc
+  elephant-clipboard
+  elephant-bluetooth
+  elephant-desktopapplications
+  elephant-files
+  elephant-menus
+  elephant-providerlist
+  elephant-runner
+  elephant-symbols
+  elephant-unicode
+  elephant-websearch
+  elephant-todo
+  walker
 )
 
 APPS_cli=(
@@ -73,8 +105,7 @@ APPS_gui=(
   google-chrome
   zen-browser-bin
   discord
-  walker
-  spotify
+  spotify-launcher
 )
 
 # The following deps are installed to give more functionality to Yazi
@@ -93,9 +124,11 @@ ALL_APPS=(
   "${APPS_tui[@]}"
   "${APPS_gui[@]}"
   "${APPS_yazi_deps[@]}"
+  "${APPS_app_launcher[@]}"
+  "${APPS_hyprland[@]}"
 )
 
-yay -S --needed --noconfirm "${ALL_APPS[@]}"
+yay -Sya --needed --noconfirm "${ALL_APPS[@]}"
 
 
 # ==========================
@@ -139,3 +172,23 @@ if [[ "$SHELL" != "/usr/bin/fish" ]]; then
 else
     echo "Shell is already fish. Skipping."
 fi
+
+
+#### SDDM
+
+if ! systemctl is-enabled getty@tty1.service >/dev/null 2>&1; then
+  sudo systemctl enable getty@tty1.service
+fi
+if ! systemctl is-enabled sddm.service >/dev/null 2>&1; then
+  sudo systemctl enable sddm.service
+fi
+
+#### Elephant / Walker
+elephant service enable
+systemctl --user start elephant.service
+
+systemctl --user restart elephant.service
+systemctl --user restart app-walker@autostart.service
+
+
+sudo systemctl daemon-reload

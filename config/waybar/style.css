@@ -43,6 +43,11 @@
   margin: 0 7.5px;
 }
 
+#language {
+  min-width: 12px;
+  margin: 0 7.5px;
+}
+
 #tray {
   margin-right: 16px;
 }
